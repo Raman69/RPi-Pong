@@ -15,7 +15,9 @@ def set_pixel(a,b,c):
     matrix.set_pixel(a,b,c)
 
 def ball():
-    set_pixel()
+    set_pixel(1,1,[0,0,255])
+
+ball()
 
 
 
