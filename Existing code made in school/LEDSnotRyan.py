@@ -37,7 +37,7 @@ def use_joystick():
 
 def get_position():
     for event in pygame.event.get():
-        if event.type == KEYDOWN:
+        if event.type == pygame.keydown:
             if event.key == pygame.K_DOWN:
                 return "up"
             elif event.key == pygame.K_UP:
