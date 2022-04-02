@@ -1,6 +1,5 @@
 from select import select
 from sense_hat import SenseHat
-from sense_hat import SenseHat
 import os
 import pygame 
 from pygame.locals import *
@@ -37,7 +36,7 @@ def use_joystick():
 
 def get_position():
     for event in pygame.event.get():
-        if event.type == KEYDOWN:
+        if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
                 return "up"
             elif event.key == pygame.K_UP:
