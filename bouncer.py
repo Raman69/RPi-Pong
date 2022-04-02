@@ -69,4 +69,6 @@ def revbounce():
     display_pixels(two)
     delay(0.05)
     display_pixels(one)
-    
+
+while True:
+    bounce()
