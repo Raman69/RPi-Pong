@@ -17,7 +17,13 @@ def set_pixel(a,b,c):
 def ball():
     set_pixel(1,1,[0,0,255])
 
-ball()
+
+def clear():
+    matrix.clear()
+
+
+
+
 
 
 
