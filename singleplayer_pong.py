@@ -13,7 +13,7 @@ sense.lowlight = True
 white = (255, 255, 255)
 blue = (0, 0, 255)
 bat_y = 4
-ball_position = [3, 3]
+ball_position = [0, 0]
 ball_velocity = [1, 1]
 w = [255,255,255]
 x = [0,0,0]
@@ -42,7 +42,7 @@ def draw_ball():
     ball_position[1] += ball_velocity[1]
     if ball_position[1] == 7 or ball_position[1] == 0:
         ball_velocity[1] = -ball_velocity[1]
-    if ball_position[0] == 6 and (bat_y-1) <= ball_position[1] <= (bat_y+1):
+    if ball_position[0] == 6 and (bat_y-2) <= ball_position[1] <= (bat_y+2):
         ball_velocity[0] = -ball_velocity[0]
     if ball_position[0] == 7:
         sense.set_pixels(sad)
