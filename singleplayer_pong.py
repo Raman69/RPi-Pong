@@ -6,6 +6,7 @@ from pygame.locals import *
 from time import sleep
 
 # Defining sense HAT and clearing LED matrix
+matrix = SenseHat()
 sense = SenseHat()
 sense.clear()
 sense.lowlight = True
@@ -44,7 +45,7 @@ def draw_ball():
         ball_velocity[1] = -ball_velocity[1]
     if ball_position[0] == 6 and (bat_y-1) <= ball_position[1] <= (bat_y+1):
         ball_velocity[0] = -ball_velocity[0]
-    if ball_position[0] == 7:
+    if ball_position[0] == 8:
         sense.set_pixels(sad)
         os._exit(0)
 
@@ -60,11 +61,16 @@ def move_down(event):
         bat_y += 1
 
 
+       
 # Main loop
 sense.stick.direction_up = move_up
 sense.stick.direction_down = move_down
+
+
 while True:
     draw_bat()
     draw_ball()
     sleep(0.25)
     sense.clear(0, 0, 0)
+
+    
