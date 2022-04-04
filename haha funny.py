@@ -6,6 +6,7 @@ from pygame.locals import *
 from time import sleep
 
 matrix = SenseHat()
+matrix.low_light = True
 
 def display_pixels(a):
     matrix.set_pixels(a)
