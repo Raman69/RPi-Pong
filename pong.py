@@ -29,7 +29,7 @@ def ballm():
             set_pixel(i,i,[0,0,255])
             sleep(0.05)
 
-ballm()
+
 
 
 
