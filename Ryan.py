@@ -42,13 +42,13 @@ while True:
     matrix.clear(0, 0, 0)
 
 def tw(n):
-    r = open("led.txt")
+    r = open("ball.txt")
     lines = r.readlines()
-    w = open('led.txt','w')
+    w = open('ball.txt','w')
     write = w.writelines(n)
-    a = open('led.txt','a')
+    a = open('ball.txt','a')
     a = a.writelines(n)
-    r = open("led.txt")
+    r = open("ball.txt")
     lines = r.readline()
 
 while True:
