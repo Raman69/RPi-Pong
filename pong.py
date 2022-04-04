@@ -22,6 +22,16 @@ def clear():
     matrix.clear()
 
 
+def ballm():
+    while True:
+        for i in range(0,8):
+            clear()
+            set_pixel(i,i,[0,0,255])
+            sleep(0.05)
+
+ballm()
+
+
 
 
 
