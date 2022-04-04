@@ -33,13 +33,11 @@ def move_down(event):
     if event.action == "pressed" and bat_y < 6:
         bat_y += 1
 
-# Main loop
+#Main loop
 matrix.stick.direction_up = move_up
 matrix.stick.direction_down = move_down
-while True:
-    draw_bat()
-    sleep(0.25)
-    matrix.clear(0, 0, 0)
+
+
 
 def tw(n):
     r = open("ball.txt")
@@ -54,8 +52,22 @@ def tw(n):
 while True:
     for i in range(0,7):
         if ball_position < [7,i]:
-            print("Ball next")
+            print("Switching pi")
             tw(0)
+
+
+
+while True:
+    for i in range(7):
+        ball_position = ball_position[i,4]
+        set_pixel(ball_position,[255,0,0])
+        sleep(0.05)
+
+
+while True:
+    draw_bat()
+    sleep(0.25)
+    matrix.clear(0, 0, 0)
 
 
 
