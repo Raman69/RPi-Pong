@@ -2,7 +2,6 @@ from bluedot.btcomm import BluetoothServer
 from time import sleep
 from signal import pause
 
-connected = False
 number = 100
 
 def data_received(data):
@@ -11,15 +10,16 @@ def data_received(data):
 
 
 def client_connected():
-    global connected
-    print("client connected")
-    connected = True
+    global number
+    print(f"Connected to {server.client_address}")
+    while server.client_connected:
+        server.send(str(number))
+        number-=1
+        sleep(1)
 
 
 def client_disconnected():
-    global connected
     print("client disconnected")
-    connected = False
 
 
 print("init")
@@ -34,10 +34,6 @@ print("starting")
 server.start()
 print(server.server_address)
 print("waiting for connection")
-
-while connected:
-    server.send(str(number-1))
-    sleep(1)
 
 try:
     pause()
