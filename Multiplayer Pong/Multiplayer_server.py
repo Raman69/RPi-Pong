@@ -1,7 +1,7 @@
 from bluedot.btcomm import BluetoothServer
 from time import sleep
 from signal import pause
-from sense_hat import SenseHat
+from sense_emu import SenseHat
 import os
 
 opp_bat_y = 4
@@ -59,9 +59,9 @@ def client_connected():
             ball_velocity[1] = -ball_velocity[1]
         if ball_position[0] == 6 and (bat_y-2) <= ball_position[1] <= (bat_y+2):
             ball_velocity[0] = -ball_velocity[0]
-        if ball_position[0] == 8:
-            sense.set_pixels(sad)
-            os._exit(0)
+        # if ball_position[0] == 8:
+        #     sense.set_pixels(sad)
+        #     os._exit(0)
 
     def move_up(event):
         global bat_y
@@ -82,7 +82,7 @@ def client_connected():
         draw_ball()
         sleep(0.25)
         sense.clear(0, 0, 0)
-        server.send(str(bat_y))
+        server.send(str(opp_bat_y))
 
 
 def client_disconnected():
