@@ -1,7 +1,7 @@
 from bluedot.btcomm import BluetoothServer
 from time import sleep
 from signal import pause
-from sense_emu import SenseHat
+from sense_hat import SenseHat
 import os
 
 opp_bat_y = 4
