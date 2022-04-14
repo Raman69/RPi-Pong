@@ -73,7 +73,7 @@ sense.stick.direction_down = move_down
 def data_received(data):
     print("recv - {}".format(data))
     global opp_bat_y
-    opp_bat_y = data
+    opp_bat_y = int(data)
 
 
 print("Connecting")
