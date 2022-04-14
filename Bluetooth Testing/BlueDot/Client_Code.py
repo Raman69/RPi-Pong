@@ -1,10 +1,7 @@
-from tokenize import Number
 from bluedot.btcomm import BluetoothClient
-from datetime import datetime
 from time import sleep
 from signal import pause
 
-won = False
 number = 0
 
 def data_received(data):
@@ -13,12 +10,21 @@ def data_received(data):
 
 print("Connecting")
 c = BluetoothClient("RPi4-8G", data_received)
+print(f"Connected to {c.server}")
 
 print("Sending")
-while True:
-    c.send(str(number+1))
+while c.connected:
+    c.send(str(number))
+    number+=1
     sleep(1)
-    if won == True:
-        break
 
-c.disconnect()
+print("Disconnected from server")
+
+try:
+    pause()
+except KeyboardInterrupt as e:
+    print("cancelled by user")
+finally:
+    print("stopping")
+    c.disconnect
+print("stopped")
