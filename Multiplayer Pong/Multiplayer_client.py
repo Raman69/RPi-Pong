@@ -16,8 +16,8 @@ blue = (0, 0, 255)
 bat_y = 4
 ball_position = [0, 0]
 ball_velocity = [1, 1]
-w = [255,255,255]
-x = [0,0,0]
+w = [255, 255, 255]
+x = [0, 0, 0]
 sad = [
     x,x,x,x,x,x,x,x,
     x,w,w,x,x,w,w,x,
@@ -26,6 +26,16 @@ sad = [
     x,x,x,x,x,x,x,x,
     x,x,w,w,w,w,x,x,
     x,w,w,x,x,w,w,x,
+    x,x,x,x,x,x,x,x
+    ]
+happy = [
+    x,x,x,x,x,x,x,x,
+    x,w,w,x,x,w,w,x,
+    x,w,w,x,x,w,w,x,
+    x,x,x,x,x,x,x,x,
+    x,x,x,x,x,x,x,x,
+    x,w,w,x,x,w,w,x,
+    x,x,w,w,w,w,x,x,
     x,x,x,x,x,x,x,x
     ]
 
@@ -39,7 +49,9 @@ def draw_bat():
     sense.set_pixel(7, opp_bat_y, white)
     sense.set_pixel(7, opp_bat_y - 1, white)
 
+
 def draw_ball():
+    global opp_bat_y
     sense.set_pixel(ball_position[0], ball_position[1], blue)
     ball_position[0] += ball_velocity[0]
     if ball_position[0] == 0:
@@ -47,11 +59,17 @@ def draw_ball():
     ball_position[1] += ball_velocity[1]
     if ball_position[1] == 7 or ball_position[1] == 0:
         ball_velocity[1] = -ball_velocity[1]
-    if ball_position[0] == 6 and (bat_y-2) <= ball_position[1] <= (bat_y+2):
+
+    if ball_position[0] == 6 and (opp_bat_y - 2) <= ball_position[1] <= (opp_bat_y + 2):
         ball_velocity[0] = -ball_velocity[0]
-    if ball_position[0] == 8:
+    if ball_position[0] == 1 and (bat_y - 2) <= ball_position[1] <= (bat_y + 2):
+        ball_velocity[0] = -ball_velocity[0]
+
+    if ball_position[0] == 0:
         sense.set_pixels(sad)
-        os._exit(0)
+    elif ball_position[0] == 7:
+        sense.set_pixels(happy)
+
 
 def move_up(event):
     global bat_y
@@ -65,10 +83,10 @@ def move_down(event):
         bat_y += 1
 
 
-       
 # Main loop
 sense.stick.direction_up = move_up
 sense.stick.direction_down = move_down
+
 
 def data_received(data):
     print("recv - {}".format(data))
