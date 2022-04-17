@@ -13,6 +13,7 @@ sense.lowlight = True
 
 white = (255, 255, 255)
 blue = (0, 0, 255)
+red = (255, 0, 0)
 bat_y = 4
 ball_position = [0, 0]
 ball_velocity = [1, 1]
@@ -45,9 +46,9 @@ def draw_bat():
     sense.set_pixel(0, bat_y + 1, white)
     sense.set_pixel(0, bat_y, white)
     sense.set_pixel(0, bat_y - 1, white)
-    sense.set_pixel(7, opp_bat_y + 1, white)
-    sense.set_pixel(7, opp_bat_y, white)
-    sense.set_pixel(7, opp_bat_y - 1, white)
+    sense.set_pixel(7, opp_bat_y + 1, red)
+    sense.set_pixel(7, opp_bat_y, red)
+    sense.set_pixel(7, opp_bat_y - 1, red)
 
 
 def draw_ball():
@@ -95,7 +96,7 @@ def data_received(data):
 
 
 print("Connecting")
-c = BluetoothClient("RPi4-8G", data_received)
+c = BluetoothClient("RPi1", data_received)
 
 print("Sending")
 while c.connected:

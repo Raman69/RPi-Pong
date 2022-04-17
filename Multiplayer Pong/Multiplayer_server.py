@@ -5,6 +5,7 @@ from sense_hat import SenseHat
 import os
 
 opp_bat_y = 4
+bat_y = 4
 
 
 def data_received(data):
@@ -23,41 +24,155 @@ def client_connected():
 
     white = (255, 255, 255)
     blue = (0, 0, 255)
+    red = (255, 0, 0)
     global opp_bat_y
-    bat_y = 4
+    # bat_y = 4
     ball_position = [0, 0]
     ball_velocity = [1, 1]
     w = [255, 255, 255]
     x = [0, 0, 0]
     sad = [
-        x,x,x,x,x,x,x,x,
-        x,w,w,x,x,w,w,x,
-        x,w,w,x,x,w,w,x,
-        x,x,x,x,x,x,x,x,
-        x,x,x,x,x,x,x,x,
-        x,x,w,w,w,w,x,x,
-        x,w,w,x,x,w,w,x,
-        x,x,x,x,x,x,x,x
-        ]
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        w,
+        w,
+        x,
+        x,
+        w,
+        w,
+        x,
+        x,
+        w,
+        w,
+        x,
+        x,
+        w,
+        w,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        w,
+        w,
+        w,
+        w,
+        x,
+        x,
+        x,
+        w,
+        w,
+        x,
+        x,
+        w,
+        w,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+    ]
     happy = [
-        x,x,x,x,x,x,x,x,
-        x,w,w,x,x,w,w,x,
-        x,w,w,x,x,w,w,x,
-        x,x,x,x,x,x,x,x,
-        x,x,x,x,x,x,x,x,
-        x,w,w,x,x,w,w,x,
-        x,x,w,w,w,w,x,x,
-        x,x,x,x,x,x,x,x
-        ]
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        w,
+        w,
+        x,
+        x,
+        w,
+        w,
+        x,
+        x,
+        w,
+        w,
+        x,
+        x,
+        w,
+        w,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        w,
+        w,
+        x,
+        x,
+        w,
+        w,
+        x,
+        x,
+        x,
+        w,
+        w,
+        w,
+        w,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+        x,
+    ]
 
     # Functions
     def draw_bat():
+        global bat_y
         sense.set_pixel(7, bat_y + 1, white)
         sense.set_pixel(7, bat_y, white)
         sense.set_pixel(7, bat_y - 1, white)
-        sense.set_pixel(0, opp_bat_y + 1, white)
-        sense.set_pixel(0, opp_bat_y, white)
-        sense.set_pixel(0, opp_bat_y - 1, white)
+        sense.set_pixel(0, opp_bat_y + 1, red)
+        sense.set_pixel(0, opp_bat_y, red)
+        sense.set_pixel(0, opp_bat_y - 1, red)
 
     def draw_ball():
         global opp_bat_y
