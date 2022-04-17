@@ -68,8 +68,10 @@ def draw_ball():
 
     if ball_position[0] == 0:
         sense.set_pixels(sad)
+        os._exit(0)
     elif ball_position[0] == 7:
         sense.set_pixels(happy)
+        os._exit(0)
 
 
 def move_up(event):

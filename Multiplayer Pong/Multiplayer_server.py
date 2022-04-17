@@ -26,143 +26,31 @@ def client_connected():
     blue = (0, 0, 255)
     red = (255, 0, 0)
     global opp_bat_y
-    # bat_y = 4
+    #bat_y = 4
     ball_position = [0, 0]
     ball_velocity = [1, 1]
     w = [255, 255, 255]
     x = [0, 0, 0]
     sad = [
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        w,
-        w,
-        x,
-        x,
-        w,
-        w,
-        x,
-        x,
-        w,
-        w,
-        x,
-        x,
-        w,
-        w,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        w,
-        w,
-        w,
-        w,
-        x,
-        x,
-        x,
-        w,
-        w,
-        x,
-        x,
-        w,
-        w,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-    ]
+        x,x,x,x,x,x,x,x,
+        x,w,w,x,x,w,w,x,
+        x,w,w,x,x,w,w,x,
+        x,x,x,x,x,x,x,x,
+        x,x,x,x,x,x,x,x,
+        x,x,w,w,w,w,x,x,
+        x,w,w,x,x,w,w,x,
+        x,x,x,x,x,x,x,x
+        ]
     happy = [
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        w,
-        w,
-        x,
-        x,
-        w,
-        w,
-        x,
-        x,
-        w,
-        w,
-        x,
-        x,
-        w,
-        w,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        w,
-        w,
-        x,
-        x,
-        w,
-        w,
-        x,
-        x,
-        x,
-        w,
-        w,
-        w,
-        w,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-        x,
-    ]
+        x,x,x,x,x,x,x,x,
+        x,w,w,x,x,w,w,x,
+        x,w,w,x,x,w,w,x,
+        x,x,x,x,x,x,x,x,
+        x,x,x,x,x,x,x,x,
+        x,w,w,x,x,w,w,x,
+        x,x,w,w,w,w,x,x,
+        x,x,x,x,x,x,x,x
+        ]
 
     # Functions
     def draw_bat():
@@ -192,11 +80,13 @@ def client_connected():
             ball_velocity[0] = -ball_velocity[0]
 
         if ball_position[0] == 0:
-            sense.set_pixels(sad)
-            server.disconnect_client()
-        elif ball_position[0] == 7:
             sense.set_pixels(happy)
             server.disconnect_client()
+            os._exit(0)
+        elif ball_position[0] == 7:
+            sense.set_pixels(sad)
+            server.disconnect_client()
+            os._exit(0)
 
     def move_up(event):
         global bat_y
