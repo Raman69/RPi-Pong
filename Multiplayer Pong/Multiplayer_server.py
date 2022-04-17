@@ -6,10 +6,43 @@ import os
 
 opp_bat_y = 4
 bat_y = 4
+sense = SenseHat()
+white = (255, 255, 255)
+blue = (0, 0, 255)
+red = (255, 0, 0)
+w = [255, 255, 255]
+x = [0, 0, 0]
+sad = [
+    x,x,x,x,x,x,x,x,
+    x,w,w,x,x,w,w,x,
+    x,w,w,x,x,w,w,x,
+    x,x,x,x,x,x,x,x,
+    x,x,x,x,x,x,x,x,
+    x,x,w,w,w,w,x,x,
+    x,w,w,x,x,w,w,x,
+    x,x,x,x,x,x,x,x
+    ]
+happy = [
+    x,x,x,x,x,x,x,x,
+    x,w,w,x,x,w,w,x,
+    x,w,w,x,x,w,w,x,
+    x,x,x,x,x,x,x,x,
+    x,x,x,x,x,x,x,x,
+    x,w,w,x,x,w,w,x,
+    x,x,w,w,w,w,x,x,
+    x,x,x,x,x,x,x,x
+    ]
+
 
 
 def data_received(data):
     print("recv - {}".format(data))
+    if data == "won":
+        sense.set_pixels(happy)
+        os._exit(0)
+    elif data == "lost":
+        sense.set_pixels(sad)
+        os._exit(0)
     global opp_bat_y
     opp_bat_y = int(data)
     # server.send(data)
@@ -18,39 +51,14 @@ def data_received(data):
 def client_connected():
     print(f"Connected to {server.client_address}")
     # Defining sense HAT and clearing LED matrix
-    sense = SenseHat()
+    #sense = SenseHat()
     sense.clear()
     sense.lowlight = True
 
-    white = (255, 255, 255)
-    blue = (0, 0, 255)
-    red = (255, 0, 0)
     global opp_bat_y
-    #bat_y = 4
+    global bat_y
     ball_position = [0, 0]
     ball_velocity = [1, 1]
-    w = [255, 255, 255]
-    x = [0, 0, 0]
-    sad = [
-        x,x,x,x,x,x,x,x,
-        x,w,w,x,x,w,w,x,
-        x,w,w,x,x,w,w,x,
-        x,x,x,x,x,x,x,x,
-        x,x,x,x,x,x,x,x,
-        x,x,w,w,w,w,x,x,
-        x,w,w,x,x,w,w,x,
-        x,x,x,x,x,x,x,x
-        ]
-    happy = [
-        x,x,x,x,x,x,x,x,
-        x,w,w,x,x,w,w,x,
-        x,w,w,x,x,w,w,x,
-        x,x,x,x,x,x,x,x,
-        x,x,x,x,x,x,x,x,
-        x,w,w,x,x,w,w,x,
-        x,x,w,w,w,w,x,x,
-        x,x,x,x,x,x,x,x
-        ]
 
     # Functions
     def draw_bat():
@@ -81,11 +89,11 @@ def client_connected():
 
         if ball_position[0] == 0:
             sense.set_pixels(happy)
-            server.disconnect_client()
+            server.send("lost")
             os._exit(0)
         elif ball_position[0] == 7:
             sense.set_pixels(sad)
-            server.disconnect_client()
+            server.send("won")
             os._exit(0)
 
     def move_up(event):

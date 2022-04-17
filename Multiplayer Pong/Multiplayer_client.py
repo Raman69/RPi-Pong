@@ -68,9 +68,11 @@ def draw_ball():
 
     if ball_position[0] == 0:
         sense.set_pixels(sad)
+        c.send("won")
         os._exit(0)
     elif ball_position[0] == 7:
         sense.set_pixels(happy)
+        c.send("lost")
         os._exit(0)
 
 
@@ -93,6 +95,12 @@ sense.stick.direction_down = move_down
 
 def data_received(data):
     print("recv - {}".format(data))
+    if data == "won":
+        sense.set_pixels(happy)
+        os._exit(0)
+    elif data == "lost":
+        sense.set_pixels(sad)
+        os._exit(0)
     global opp_bat_y
     opp_bat_y = int(data)
 
