@@ -15,7 +15,7 @@ white = (255, 255, 255)
 blue = (0, 0, 255)
 red = (255, 0, 0)
 bat_y = 4
-ball_position = [0, 0]
+ball_position = [4, 4]
 ball_velocity = [1, 1]
 w = [255, 255, 255]
 x = [0, 0, 0]
@@ -53,6 +53,7 @@ def draw_bat():
 
 def draw_ball():
     global opp_bat_y
+    global ball_position
     sense.set_pixel(ball_position[0], ball_position[1], blue)
     ball_position[0] += ball_velocity[0]
     if ball_position[0] == 0:
@@ -68,12 +69,12 @@ def draw_ball():
 
     if ball_position[0] == 0:
         sense.set_pixels(sad)
-        c.send("1")
+        c.send("100")
         sense.stick.wait_for_event()
         exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
     elif ball_position[0] == 7:
         sense.set_pixels(happy)
-        c.send("0")
+        c.send("101")
         sense.stick.wait_for_event()
         exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
 
@@ -89,11 +90,15 @@ def move_down(event):
     if event.action == "pressed" and bat_y < 6:
         bat_y += 1
 
+def middle(event):
+    if event.action == "hold":
+        c.disconnect()
+        exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
 
 # Main loop
 sense.stick.direction_up = move_up
 sense.stick.direction_down = move_down
-
+sense.stick.direction_middle = middle
 
 def data_received(data):
     print("recv - {}".format(data))
@@ -124,6 +129,7 @@ while c.connected:
     sense.clear(0, 0, 0)
     c.send(str(bat_y))
 
-
-c.disconnect()
-exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+try:
+    c.disconnect()
+except KeyboardInterrupt as e:
+    exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())

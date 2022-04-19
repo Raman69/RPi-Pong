@@ -45,6 +45,10 @@ def data_received(data):
     #     exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
     global opp_bat_y
     opp_bat_y = int(data)
+    if opp_bat_y > 6 :
+        opp_bat_y = 6
+    elif opp_bat_y < 1 :
+        opp_bat_y = 1
     # server.send(data)
 
 
@@ -58,7 +62,7 @@ def client_connected():
 
     global opp_bat_y
     global bat_y
-    ball_position = [0, 0]
+    ball_position = [4, 4]
     ball_velocity = [1, 1]
 
     # Functions
@@ -90,13 +94,13 @@ def client_connected():
 
         if ball_position[0] == 0:
             sense.set_pixels(happy)
-            server.send("0")
+            server.send("101")
             sense.stick.wait_for_event()
             server.stop()
             exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
         elif ball_position[0] == 7:
             sense.set_pixels(sad)
-            server.send("1")
+            server.send("100")
             sense.stick.wait_for_event()
             server.stop()
             exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
@@ -111,9 +115,16 @@ def client_connected():
         if event.action == "pressed" and bat_y < 6:
             bat_y += 1
 
+    def middle(event):
+        if event.action == "hold":
+            server.disconnect_client()
+            server.stop()
+            exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
     # Main loop
     sense.stick.direction_up = move_up
     sense.stick.direction_down = move_down
+    sense.stick.direction_middle = middle
+
     while server.client_connected:
         draw_bat()
         draw_ball()
