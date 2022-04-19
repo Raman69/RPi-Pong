@@ -106,7 +106,7 @@ def data_received(data):
 
 
 print("Connecting")
-c = BluetoothClient("RPi1", data_received)
+c = BluetoothClient("RPi3", data_received)
 
 print("Sending")
 while c.connected:
