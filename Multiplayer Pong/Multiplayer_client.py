@@ -68,12 +68,14 @@ def draw_ball():
 
     if ball_position[0] == 0:
         sense.set_pixels(sad)
-        c.send("won")
-        os._exit(0)
+        c.send("1")
+        sense.stick.wait_for_event()
+        exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
     elif ball_position[0] == 7:
         sense.set_pixels(happy)
-        c.send("lost")
-        os._exit(0)
+        c.send("0")
+        sense.stick.wait_for_event()
+        exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
 
 
 def move_up(event):
@@ -95,14 +97,20 @@ sense.stick.direction_down = move_down
 
 def data_received(data):
     print("recv - {}".format(data))
-    if data == "won":
+    if data == "1":
         sense.set_pixels(happy)
-        os._exit(0)
-    elif data == "lost":
+        sense.stick.wait_for_event()
+        exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
+    elif data == "0":
         sense.set_pixels(sad)
-        os._exit(0)
+        sense.stick.wait_for_event()
+        exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
     global opp_bat_y
     opp_bat_y = int(data)
+    if opp_bat_y > 6 :
+        opp_bat_y = 6
+    elif opp_bat_y < 1 :
+        opp_bat_y = 1
 
 
 print("Connecting")
@@ -118,3 +126,4 @@ while c.connected:
 
 
 c.disconnect()
+exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
