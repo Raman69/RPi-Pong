@@ -37,18 +37,19 @@ happy = [
 
 def data_received(data):
     print("recv - {}".format(data))
-    if data == "won":
-        sense.set_pixels(happy)
-        os._exit(0)
-    elif data == "lost":
-        sense.set_pixels(sad)
-        os._exit(0)
+    # if data == "1":
+    #     sense.stick.wait_for_event()
+    #     exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
+    # elif data == "0":
+    #     sense.stick.wait_for_event()
+    #     exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
     global opp_bat_y
     opp_bat_y = int(data)
     # server.send(data)
 
 
 def client_connected():
+    global server
     print(f"Connected to {server.client_address}")
     # Defining sense HAT and clearing LED matrix
     #sense = SenseHat()
@@ -89,12 +90,16 @@ def client_connected():
 
         if ball_position[0] == 0:
             sense.set_pixels(happy)
-            server.send("lost")
-            os._exit(0)
+            server.send("0")
+            sense.stick.wait_for_event()
+            server.stop()
+            exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
         elif ball_position[0] == 7:
             sense.set_pixels(sad)
-            server.send("won")
-            os._exit(0)
+            server.send("1")
+            sense.stick.wait_for_event()
+            server.stop()
+            exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
 
     def move_up(event):
         global bat_y
@@ -136,6 +141,7 @@ print("waiting for connection")
 
 try:
     pause()
+    exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
 except KeyboardInterrupt as e:
     print("cancelled by user")
 finally:
