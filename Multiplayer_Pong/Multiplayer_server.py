@@ -39,10 +39,10 @@ def data_received(data):
     print("recv - {}".format(data))
     # if data == "1":
     #     sense.stick.wait_for_event()
-    #     exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+    #     os.system('python /home/pi/RPi-Pong/Main_Interface.py')
     # elif data == "0":
     #     sense.stick.wait_for_event()
-    #     exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+    #     os.system('python /home/pi/RPi-Pong/Main_Interface.py')
     global opp_bat_y
     opp_bat_y = int(data)
     if opp_bat_y > 6 :
@@ -97,13 +97,13 @@ def client_connected():
             server.send("101")
             sense.stick.wait_for_event()
             server.stop()
-            exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+            os.system('python /home/pi/RPi-Pong/Main_Interface.py')
         elif ball_position[0] == 7:
             sense.set_pixels(sad)
             server.send("100")
             sense.stick.wait_for_event()
             server.stop()
-            exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+            os.system('python /home/pi/RPi-Pong/Main_Interface.py')
 
     def move_up(event):
         global bat_y
@@ -119,7 +119,7 @@ def client_connected():
         if event.action == "hold":
             server.disconnect_client()
             server.stop()
-            exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+            os.system('python /home/pi/RPi-Pong/Main_Interface.py')
     # Main loop
     sense.stick.direction_up = move_up
     sense.stick.direction_down = move_down
@@ -152,7 +152,7 @@ print("waiting for connection")
 
 try:
     pause()
-    exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+    os.system('python /home/pi/RPi-Pong/Main_Interface.py')
 except KeyboardInterrupt as e:
     print("cancelled by user")
 finally:

@@ -7,6 +7,10 @@ import os
 opp_bat_y = 4
 
 # Defining sense HAT and clearing LED matrix
+
+def joystick_event(event):
+    print("The joystick was {} {}".format(event.action, event.direction))
+
 sense = SenseHat()
 sense.clear()
 sense.lowlight = True
@@ -40,6 +44,33 @@ happy = [
     x,x,x,x,x,x,x,x
     ]
 
+
+sense.set_pixels([
+    x,x,x,x,x,x,x,x,
+    w,x,x,x,x,x,x,x,
+    x,x,x,x,x,x,x,x,
+    x,x,x,x,x,x,x,x,
+    w,w,x,x,x,x,x,x,
+    x,x,x,x,x,x,x,x,
+    x,x,x,x,x,x,x,x,
+    w,w,w,x,x,x,x,x
+    ])
+
+event = sense.stick.wait_for_event()
+while event.direction != "up" and event.direction != "down" and event.direction != "middle":
+    event = sense.stick.wait_for_event()
+    joystick_event(event)
+
+if event.action == "pressed" and event.direction == "up":
+    sense.clear()
+    server = "RPi1"
+elif event.action == "pressed" and event.direction == "down":
+    sense.clear()
+    server = "RPi3"
+elif event.action == "pressed" and event.direction == "middle":
+    sense.clear()
+    server = "RPi2"
+
 # Functions
 def draw_bat():
     global opp_bat_y
@@ -71,12 +102,12 @@ def draw_ball():
         sense.set_pixels(sad)
         c.send("100")
         sense.stick.wait_for_event()
-        exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+        os.system('python /home/pi/RPi-Pong/Main_Interface.py')
     elif ball_position[0] == 7:
         sense.set_pixels(happy)
         c.send("101")
         sense.stick.wait_for_event()
-        exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+        os.system('python /home/pi/RPi-Pong/Main_Interface.py')
 
 
 def move_up(event):
@@ -93,7 +124,7 @@ def move_down(event):
 def middle(event):
     if event.action == "hold":
         c.disconnect()
-        exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+        os.system('python /home/pi/RPi-Pong/Main_Interface.py')
 
 # Main loop
 sense.stick.direction_up = move_up
@@ -105,11 +136,11 @@ def data_received(data):
     if data == "1":
         sense.set_pixels(happy)
         sense.stick.wait_for_event()
-        exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+        os.system('python /home/pi/RPi-Pong/Main_Interface.py')
     elif data == "0":
         sense.set_pixels(sad)
         sense.stick.wait_for_event()
-        exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+        os.system('python /home/pi/RPi-Pong/Main_Interface.py')
     global opp_bat_y
     opp_bat_y = int(data)
     if opp_bat_y > 6 :
@@ -119,7 +150,7 @@ def data_received(data):
 
 
 print("Connecting")
-c = BluetoothClient("RPi3", data_received)
+c = BluetoothClient(server, data_received)
 
 print("Sending")
 while c.connected:
@@ -132,4 +163,4 @@ while c.connected:
 try:
     c.disconnect()
 except KeyboardInterrupt as e:
-    exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
+    os.system('python /home/pi/RPi-Pong/Main_Interface.py')
