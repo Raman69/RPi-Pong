@@ -26,7 +26,7 @@ while event.direction != "up" and event.direction != "down":
     joystick_event(event)
 if event.action == "pressed" and event.direction == "up":
     sense.clear()
-    exec(open(r"/home/raman/RPi-Pong/Multiplayer Pong/Multiplayer_server.py").read())
+    exec(open(r"/home/pi/RPi-Pong/Multiplayer Pong/Multiplayer_server.py").read())
 elif event.action == "pressed" and event.direction == "down":
     sense.clear()
-    exec(open(r"/home/raman/RPi-Pong/Multiplayer Pong/Multiplayer_client.py").read())
+    exec(open(r"/home/pi/RPi-Pong/Multiplayer Pong/Multiplayer_client.py").read())

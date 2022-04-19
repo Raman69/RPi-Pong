@@ -70,12 +70,12 @@ def draw_ball():
         sense.set_pixels(sad)
         c.send("1")
         sense.stick.wait_for_event()
-        exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
+        exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
     elif ball_position[0] == 7:
         sense.set_pixels(happy)
         c.send("0")
         sense.stick.wait_for_event()
-        exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
+        exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
 
 
 def move_up(event):
@@ -100,11 +100,11 @@ def data_received(data):
     if data == "1":
         sense.set_pixels(happy)
         sense.stick.wait_for_event()
-        exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
+        exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
     elif data == "0":
         sense.set_pixels(sad)
         sense.stick.wait_for_event()
-        exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
+        exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
     global opp_bat_y
     opp_bat_y = int(data)
     if opp_bat_y > 6 :
@@ -126,4 +126,4 @@ while c.connected:
 
 
 c.disconnect()
-exec(open(r"/home/raman/RPi-Pong/Main_Interface.py").read())
+exec(open(r"/home/pi/RPi-Pong/Main_Interface.py").read())
