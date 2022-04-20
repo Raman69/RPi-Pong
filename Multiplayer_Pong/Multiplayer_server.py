@@ -155,6 +155,8 @@ try:
     os.system('python /home/pi/RPi-Pong/Main_Interface.py')
 except KeyboardInterrupt as e:
     print("cancelled by user")
+except OSError:
+    os.system('python /home/pi/RPi-Pong/Main_Interface.py')
 finally:
     print("stopping")
     server.stop()

@@ -164,3 +164,5 @@ try:
     c.disconnect()
 except KeyboardInterrupt as e:
     os.system('python /home/pi/RPi-Pong/Main_Interface.py')
+except OSError:
+    os.system('python /home/pi/RPi-Pong/Main_Interface.py')
