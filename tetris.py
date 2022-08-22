@@ -75,7 +75,7 @@ def L():
 #gravity (will just x-1 every second)
 while True:#
     clear()
-    square()
+    L()
     time.sleep(1)
     if x == 0:
         break
