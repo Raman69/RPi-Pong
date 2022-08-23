@@ -2,6 +2,8 @@
 import random 
 from LEDmatrix import *
 import time
+from sense_hat import SenseHat
+
 #end of imports
 clear()
 
@@ -18,8 +20,10 @@ g = [0,255,0]
 #pink
 p = [204, 0, 255]
 
-#sp to save time(this is gonna be used alot)
+#shortened things cus why not
 sp = set_pixel
+sense = SenseHat()
+
 
 #The x and y coords at the start (cus the whole thing is 8x8)
 x = 5
@@ -71,11 +75,9 @@ def L():
 
 
 
-use_joystick()
 #main loop
 while True:
     clear()
-    T()
     #gravity
     while True:
         time.sleep(1)
@@ -83,15 +85,26 @@ while True:
             break
         else:
             x = x-1
-    #movement left and right
-    while True:
-        #getting joystick position
-        joy = get_position()
-        if joy == "left":
-            y =  y-1
-        elif joy == "right":
-            y = y+1
 
+            
+    #movement left and right (joystick shit)
+
+
+    while True:
+        for event in sense.stick.get_events():
+            direction = event.direction
+            print(event.direction)
+            if direction == "up" :
+                print("right")
+                y = y-1
+                print(y)
+            elif direction == "down":
+                print("left")
+                y = y+1
+                print(y)
+            
+            clear()
+            T()
 
 
 
