@@ -71,16 +71,30 @@ def L():
 
 
 
-
-#gravity (will just x-1 every second)
-while True:#
+use_joystick()
+#main loop
+while True:
     clear()
-    L()
-    time.sleep(1)
-    if x == 0:
-        break
-    else:
-        x = x-1
+    T()
+    #gravity
+    while True:
+        time.sleep(1)
+        if x == 0:
+            break
+        else:
+            x = x-1
+    #movement left and right
+    while True:
+        #getting joystick position
+        joy = get_position()
+        if joy == "left":
+            y =  y-1
+        elif joy == "right":
+            y = y+1
+
+
+
+
 
 
     
