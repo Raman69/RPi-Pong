@@ -28,6 +28,7 @@ sense = SenseHat()
 #The x and y coords at the start (cus the whole thing is 8x8)
 x_axies = 5
 y_axies = 3
+current_shape = ""
 
 
 
@@ -37,6 +38,7 @@ def square():
     sp(x_axies+1,y_axies,y)
     sp(x_axies+1,y_axies+1,y)
     sp(x_axies,y_axies+1,y)
+    current_shape = "square"
 
 
 #line def (cyan)
@@ -45,6 +47,7 @@ def line():
     sp(x_axies,y_axies+1,c)
     sp(x_axies,y_axies+2,c)
     sp(x_axies,y_axies+3,c)
+    current_shape = "line"
 
 
 #def t shape (pink)
@@ -53,6 +56,7 @@ def T():
     sp(x_axies+1,y_axies,p)
     sp(x_axies+1,y_axies+1,p)
     sp(x_axies+1,y_axies-1,p)
+    current_shape = "T"
 
 
 #idk what to call this one
@@ -61,16 +65,18 @@ def weird():
 
     sp(x_axies,y_axies,g)
     sp(x_axies+1,y_axies,g)
-    sp(x_axies+1,y_axies-1,g)
-    sp(x_axies+2,y_axies-1,g)
+    sp(x_axies+1,y_axies+1,g)
+    sp(x_axies+2,y_axies+1,g)
+    current_shape = "weird"
 
 
 #L shape def (red/orange)
 def L():
     sp(x_axies,y_axies,r)
-    sp(x_axies,y_axies+1,r)
+    sp(x_axies,y_axies-1,r)
     sp(x_axies+1,y_axies,r)
     sp(x_axies+2,y_axies,r)
+    current_shape = "L"
 
 
 
@@ -78,28 +84,36 @@ def L():
 
     
 
-            
-    #movement left and right (joystick shit)
+#main loop[]           
+
 
 while True:
     T()
+    #gravity
     while True:
         time.sleep(1)
         if x_axies == 0:
             break
         else:
             x_axies = x_axies-1
+    #movement left and right (joystick shit)
     for event in sense.stick.get_events():
         direction = event.direction
         print(event.direction)
         if direction == "up" :
             print("right")
+            if current_shape == "square":
+                if y_axies == 7:
+                    y_axies = 6
             y_axies = y_axies-1
             print(y_axies)
         elif direction == "down":
             print("left")
             y_axies = y_axies+1
             print(y_axies)
+
+
+                
             
         clear()
         
