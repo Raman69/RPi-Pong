@@ -20,6 +20,10 @@ g = [0,255,0]
 #pink
 p = [204, 0, 255]
 
+shapes = [["square", 2, 2]]
+y_axis = 7
+y_axis -= shapes[0,2]-1
+
 #shortened things cus why not
 sp = set_pixel
 sense = SenseHat()
