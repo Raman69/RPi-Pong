@@ -20,9 +20,9 @@ g = [0,255,0]
 #pink
 p = [204, 0, 255]
 
-shapes = [["square", 2, 2]]
-y_axis = 7
-y_axis -= shapes[0,2]-1
+shape_offset = [["square", 1, 1]["line", 0, 3]["T", 1, 1]["weird", 2, 1]["L", 2, 1]]
+#y_axis = 7
+#y_axis -= shapes[0,2]
 
 #shortened things cus why not
 sp = set_pixel
