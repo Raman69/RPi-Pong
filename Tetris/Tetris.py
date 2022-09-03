@@ -85,11 +85,25 @@ def L():
     sp(x_axies+1,y_axies,r)
     sp(x_axies+2,y_axies,r)
     
+#movement left and right (joystick shit)
+def movement():
+    for event in sense.stick.get_events():
+            direction = event.direction
+            print(event.direction)
+            if direction == "up" :
+                print("right")
+                if current_shape == "square":
+                    if y_axies == 7:
+                        y_axies = 6
+                y_axies = y_axies-1
+                print(y_axies)
+            elif direction == "down":
+                print("left")
+                y_axies = y_axies+1
+                print(y_axies)
 
 
-
-
-#gravity def    !!(sort later)!!
+#gravity def movement down   !!(sort later)!!
 def gravity():
         time.sleep(1)
         if x_axies == 0:
@@ -101,26 +115,12 @@ def gravity():
 #main loop         
 
 while True:
-    #movement left and right (joystick shit)
-    for event in sense.stick.get_events():
-        direction = event.direction
-        print(event.direction)
-        if direction == "up" :
-            print("right")
-            if current_shape == "square":
-                if y_axies == 7:
-                    y_axies = 6
-            y_axies = y_axies-1
-            print(y_axies)
-        elif direction == "down":
-            print("left")
-            y_axies = y_axies+1
-            print(y_axies)
+    pass
+
+    
 
 
-                
             
-        clear()
         
 
 
