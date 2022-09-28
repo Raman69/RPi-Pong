@@ -57,7 +57,7 @@ elif event.action == "pressed" and event.direction == "left":
 
     if event.action == "pressed" and event.direction == "up":
         sense.clear()
-        os.system('python /home/pi/RPi-Pong/Multiplayer_Pong/Multiplayer_server.py')
+        os.system('python /home/pi/RPi-Pong/RPi-Pong/Multiplayer_Pong/Multiplayer_server.py')
     elif event.action == "pressed" and event.direction == "down":
         sense.clear()
-        os.system('python /home/pi/RPi-Pong/Multiplayer_Pong/Multiplayer_client.py')
+        os.system('python /home/pi/RPi-Pong/RPi-Pong/Multiplayer_Pong/Multiplayer_client.py')
