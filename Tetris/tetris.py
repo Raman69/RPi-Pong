@@ -20,9 +20,9 @@ g = [0,255,0]
 #pink
 p = [204, 0, 255]
 
-shapes = [["square", 2, 2]]
-y_axis = 7
-y_axis -= shapes[0,2]-1
+#shapes = [["square", 2, 2]]
+#y_axis = 7
+#y_axis = shapes[0,2]
 
 #shortened things cus why not
 sp = set_pixel
@@ -32,6 +32,7 @@ sense = SenseHat()
 #The x and y coords at the start (cus the whole thing is 8x8)
 x_axies = 5
 y_axies = 3
+#the current shape being used
 current_shape = ""
 
 
