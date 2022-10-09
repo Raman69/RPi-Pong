@@ -1,7 +1,5 @@
-from sense_hat import SenseHat
-sense = SenseHat()
+y = 0
 
+y = 6
 
-while True:
-    for event in sense.stick.get_events():
-        print(event.direction, event.action)
+print(y)

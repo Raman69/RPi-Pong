@@ -93,7 +93,7 @@ def L():
 
 
 while True:
-    T()
+    square()
     #gravity
     while True:
         time.sleep(1)
@@ -104,15 +104,13 @@ while True:
     #movement left and right (joystick shit)
     for event in sense.stick.get_events():
         direction = event.direction
+        event = event.action
         print(event.direction)
-        if direction == "up" :
+        if direction == "up" and event == "pressed" :
             print("right")
-            if current_shape == "square":
-                if y_axies == 7:
-                    y_axies = 6
             y_axies = y_axies-1
             print(y_axies)
-        elif direction == "down":
+        elif direction == "down" and event == "pressed":
             print("left")
             y_axies = y_axies+1
             print(y_axies)
