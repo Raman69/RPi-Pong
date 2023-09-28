@@ -53,22 +53,23 @@ four = [
 
 def bounce():
     display_pixels(one)
-    delay(0.05)
+    delay(0.75)
     display_pixels(two)
-    delay(0.05)
+    delay(0.75)
     display_pixels(three)
-    delay(0.05)
+    delay(0.75)
     display_pixels(four)
     
 
 def revbounce():
     display_pixels(four)
-    delay(0.05)
+    delay(0.75)
     display_pixels(three)
-    delay(0.05)
+    delay(0.75)
     display_pixels(two)
-    delay(0.05)
+    delay(0.75)
     display_pixels(one)
 
 while True:
     bounce()
+    revbounce()
